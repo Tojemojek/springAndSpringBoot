@@ -48,6 +48,15 @@ public class SpringcrudApplication implements CommandLineRunner {
 
         productRepository.save(product2);
 
+        Product product3 = new Product();
+        product3.setName("nazwa3");
+        product3.setType("typ2");
+        product3.setCategory("test2");
+        product3.setDescription("zupełnie inny opis");
+        product3.setPrice(3.50);
+
+        productRepository.save(product3);
+
         LOG.info("All products found by spring");
         LOG.info("=============================");
         List<Product> all = productRepository.findAll();
@@ -90,6 +99,29 @@ public class SpringcrudApplication implements CommandLineRunner {
         LOG.info("");
 
 
+        Product foundProduct = productRepository.findByType("typ1");
+
+        LOG.info("Update product test");
+        LOG.info("=============================");
+        LOG.info(foundProduct.toString());
+
+        foundProduct.setPrice(999.99);
+        foundProduct.setType("Updated Type");
+
+        productRepository.save(foundProduct);
+
+        Product foundProduct2 = productRepository.findByType("Updated Type");
+        LOG.info(foundProduct2.toString());
+
+        LOG.info("delete product test");
+        LOG.info("=============================");
+
+        LOG.info("Łącznie jest: " + productRepository.count() + " produktów");
+        productRepository.delete(foundProduct2);
+        LOG.info("A po skasowaniu jest: " + productRepository.count() + " produktów");
+
+
     }
+
 
 }
