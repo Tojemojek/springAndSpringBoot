@@ -17,7 +17,6 @@ public class RestapiApplication implements CommandLineRunner {
 		SpringApplication.run(RestapiApplication.class, args);
 	}
 
-
 	@Override
 	public void run(String... strings) throws Exception {
 
