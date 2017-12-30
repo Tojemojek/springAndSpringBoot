@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.kostrowski.nauka.restapi.model.Product;
 import pl.kostrowski.nauka.restapi.service.ProductService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/api/products/")
@@ -17,6 +19,11 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @RequestMapping(path = "", method = RequestMethod.GET)
+    public List<Product> getProduct() {
+        return productService.getAllProducts();
+    }
 
     @RequestMapping(path = "{id}", method = RequestMethod.GET)
     public Product getProduct(@PathVariable("id") String id) {

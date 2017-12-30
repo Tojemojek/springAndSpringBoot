@@ -7,12 +7,27 @@ import org.springframework.stereotype.Repository;
 import pl.kostrowski.nauka.restapi.model.Product;
 import pl.kostrowski.nauka.restapi.repository.ProductRepository;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @Repository
 public class ProductService {
     private final Logger LOG = LoggerFactory.getLogger(ProductService.class);
 
     @Autowired
     ProductRepository productRepository;
+
+    public List<Product> getAllProducts() {
+        try {
+            LOG.info("Próba pobrania wszystkich produktów");
+            List<Product> productsFound = productRepository.findAll();
+            return productsFound;
+        } catch (Exception e) {
+            LOG.error("Nie znaleziono produktów");
+            LOG.error(e.getMessage());
+            return new LinkedList<Product>();
+        }
+    }
 
     public Product getProduct(String id) {
         try {
@@ -62,4 +77,6 @@ public class ProductService {
             LOG.error(e.getMessage());
         }
     }
+
+
 }
